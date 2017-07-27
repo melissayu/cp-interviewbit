@@ -75,3 +75,88 @@ public class Solution {
         return a;
 	}
 }
+
+//Partition List
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+	public ListNode partition(ListNode a, int b) {
+	    
+	    //keep track of first&last node of less than (curLessNode)
+	    ListNode curLessHead=null;
+	    ListNode curLessNode=null;
+
+	    //keep track of first&last node of equals (curEqualNode)
+        // ListNode curEqualHead=null;
+        // ListNode curEqualNode=null;
+	    
+	    //keep track of first&last node of greater (curGreaterNode)
+	    ListNode curGreaterHead=null;
+	    ListNode curGreaterNode=null;
+
+	    //loop through each element of a
+	    while(a != null) {
+	        //if element is less than b, add it as next of curLess
+	        if (a.val < b) {
+	            ListNode newNode = new ListNode(a.val);
+	            if (curLessHead == null) {
+	                curLessHead = newNode;
+	                curLessNode = curLessHead;
+	            } else {
+    	            curLessNode.next = newNode;
+	                curLessNode = newNode;
+	            }
+	        }
+	        
+	        //if element is equal to b, add it as next of curEqual
+	       // else if (a.val == b) {
+	       //     ListNode newNode = new ListNode(a.val);
+	       //     if (curEqualHead == null) {
+	       //         curEqualHead = newNode;
+	       //         curEqualNode = curEqualHead;
+	       //     } else {
+    	   //         curEqualNode.next = newNode;
+	       //         curEqualNode = newNode;
+	       //     }
+	       // }
+	        //if element is greater than b, add it as next of curGreater
+	        else if (a.val >= b) {
+	            ListNode newNode = new ListNode(a.val);
+	            if (curGreaterHead == null) {
+	                curGreaterHead = newNode;
+	                curGreaterNode = curGreaterHead;
+	            } else {
+    	            curGreaterNode.next = newNode;
+	                curGreaterNode = newNode;
+	            }
+	        }
+	        a = a.next;
+	    }
+	        
+	        
+	        
+	   if (curLessHead==null) {
+	       //if (curEqualHead ==null) {
+	           return curGreaterHead;
+	       //} else {
+	       //    curEqualNode.next = curGreaterHead;
+	       //}
+	       //return curEqualHead;
+	   }
+
+        // if (curEqualHead==null) {
+        //     curLessNode.next = curGreaterHead;
+        //     return curLessHead;
+        // } 
+        
+        curLessNode.next = curGreaterHead;
+        return curLessHead;
+	    
+	}
+}
